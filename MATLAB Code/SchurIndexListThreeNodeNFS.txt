@@ -1,0 +1,2 @@
+<--- List of Schur Indices of 3 node BPS Quivers with 0 flavour symmetry --->
+

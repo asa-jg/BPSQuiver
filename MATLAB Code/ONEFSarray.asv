@@ -1,0 +1,39 @@
+function result = ONEFSarray(M,Range,Rank, coeffq, flavexpr, normalise_z, numflavours)
+    syms l1 l2 l3 k1 k2 k3 yf y1 y2 y3 l q
+
+    list = graphOrdering(M);
+
+    sizes = size(M);
+    n = sizes(1);
+    %coeffq = ;
+    
+    expressionarray = rearrangefearrayONEFS(flavexpr);
+    coeffzarray = returnkiliarray(expressionarray);
+    coeffqarray = {-1/2*(k1 - l1)^2 -1/2*(k2 - l2)^2 -1/2*(k3 - l3)^2};
+    krondetarray = returnkrondetarray(expressionarray);
+
+    for t = 1:n
+        coeffqarray{t} = changeflavour(coeffqarray{t},n);
+        coeffzarray{t} = changeflavour(coeffzarray{t},n);
+        krondetarray{t} = changeflavour(krondetarray{t},n);
+    end
+    
+    for i = 1:n
+        generateFunctionONEFS(M, list, 1, coeffqarray{i}, coeffzarray{i}, krondetarray{i});
+        res(q) = hardcoded_generalfuncONEFS(1); 
+        tay = taylor_series(res, 1); 
+        qinfnew = qinf^Rank; 
+        fin = multiply(qinfnew, tay);
+        result = rewrite(fin, 1);
+        % Extract coefficients of q up to the linear term
+    coeffsArray = coeffs(result, q);
+    
+        % Check if the linear term's coefficient matches N
+        % coeffsArray might return a constant term plus the linear term, so check the array's length and values
+        if length(coeffsArray) > 1 && coeffsArray(2) == N % Assuming the linear term is the second element
+            disp(['The value of i for which the coefficient of the linear term in q equals N is: ', num2str(i)]);
+            % If you only want the first match, you can break the loop here
+            % break;
+        end
+    end
+
