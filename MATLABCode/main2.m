@@ -1,2 +1,8 @@
-disp(hardcoded1flavour(2));
-disp(hardcoded1flavourNEW(2));
+tic;
+
+M = [0 1 0; -1 0 -1; 0 1 0];
+y = deriveflavourvectorONEFS(M);
+disp('Solution vector coefficients:');
+disp(y);
+
+toc;

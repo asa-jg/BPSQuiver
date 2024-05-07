@@ -34,6 +34,7 @@ function result = ONEFSarray(M,Range,Rank, coeffqarray, flavexpr, normalise_z)
     end
     generateFunctionONEFS(M, list, Range, coeffqarray{correctval}, coeffzarray{correctval}, krondetarray{correctval},normalise_z);
     res(q) = hardcoded_generalfuncONEFS(Range); 
+    %res(q) = hardcoded1flavourNEW(Range);
     tay = taylor_series(res, Range); 
     disp(tay);
     qinfnew = qinf^Rank; 

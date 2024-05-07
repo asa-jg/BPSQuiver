@@ -8,7 +8,7 @@ function expr = hardcoded1flavourNEW(n)
                     for l5 = 0:n
                         for l6 = 0:n
                             if l1 + l3 == l4 + l6 && l5 + l1 == l2 + l4
-                                expr = expr + ((-1)^(l1 + l2 + l3 + l4 + l5 + l6)*q^((1/2)*(l1 + l2 + l3 + l4 + l5 + l6) + (l1 - l4)^2/2+ l1*l5 + l3*l5 + l1*l6)*z^(2*(l1 - l4)))/(qpoch(q,l1)*(qpoch(q,l2))*(qpoch(q,l3))*(qpoch(q,l4))*(qpoch(q,l5))*(qpoch(q,l6)));
+                                expr = expr + ((-1)^(l1 + l2 + l3 + l4 + l5 + l6)*q^((1/2)*(l1 + l2 + l3 + l4 + l5 + l6) + (l1 - l4)^2/2+ (l1*l5 + l3*l5 + l1*l6) + l4*l6 - l1*l6 - l3*l4 + l1*l3)*z^(2*(l1 - l4)))/(qpoch(q,l1)*(qpoch(q,l2))*(qpoch(q,l3))*(qpoch(q,l4))*(qpoch(q,l5))*(qpoch(q,l6)));
                             end
                         end
                     end

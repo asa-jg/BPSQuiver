@@ -22,7 +22,7 @@ function result = ONEFS(M,Range,Rank, coeffq, flavexpr, normalise_z)
     end
     generateFunctionONEFS(M,list,Range, coeffq, coeffz, modifiedArray);
     res(q) = hardcoded_generalfuncONEFS(Range);
-    %res(q) = hardcoded1flavour(Range);
+    %res(q) = hardcoded1flavourNEW(Range);
     tay = taylor_series(res,Range);
     qinfnew = qinf^Rank;
     fin = multiply(qinfnew, tay);
