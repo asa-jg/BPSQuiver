@@ -1,0 +1,5 @@
+% Define an antisymmetric matrix with a guaranteed null space of dimension >= 2
+M = [0 -1 -1 -1 -1];
+Y = solveLinearSystem(M);
+disp('Independent solution vectors:');
+disp(Y);
