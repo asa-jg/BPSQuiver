@@ -1,7 +1,5 @@
 function [sortedInputList, counter] = customBubbleSort(INPUTLIST, ORDERLIST, M)
-    % Define symbolic variable for computations
-    syms k1 k2 k3 l1 l2 l3;
-
+ 
     % Initialize the symbolic counter
     counter = sym(0);
 
