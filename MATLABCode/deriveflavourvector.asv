@@ -42,8 +42,11 @@ function Y = deriveflavourvector(M, verbose)
                     elseif coeff == 1
                         fprintf('y%d', i);
                     else
-                        fprintf('%.2fy%d', coeff, i);
-                         
+                        if coeff < 0
+                            fprintf('%.2fy%d', coeff, i);
+                        else
+                            fprintf('%.2fy%d', coeff, i);
+                        end 
                     end
                 end
             end

@@ -1,9 +1,13 @@
 function [sortedInputList, counter] = inputflavourvector(INPUTLIST, ORDERLIST, M)
     % Initialize the symbolic counter
     counter = sym(0);
- 
-    % Modify ORDERLIST by removing '1' and duplicating remaining elements
-    modifiedOrderList = repmat(ORDERLIST(ORDERLIST ~= 1), 1, 2);
+
+    % Identify and remove the smallest element from ORDERLIST
+    smallestElement = min(ORDERLIST);
+    modifiedOrderList = ORDERLIST(ORDERLIST ~= smallestElement);
+
+    % Duplicate the remaining elements of the modified ORDERLIST
+    modifiedOrderList = repmat(modifiedOrderList, 1, 2);
 
     % Initialize the sorted list as the INPUTLIST initially
     sortedInputList = INPUTLIST;
@@ -22,7 +26,9 @@ function [sortedInputList, counter] = inputflavourvector(INPUTLIST, ORDERLIST, M
             nextLabelIndex = find(modifiedOrderList == labels(j+1), 1);
             
             % Swap if current label comes after the next label in order list
-            if currentLabelIndex > nextLabelIndex
+            if isempty(currentLabelIndex) || isempty(nextLabelIndex) || currentLabelIndex > nextLabelIndex
+               disp(sortedInputList);
+
                 % Update counter with the product of matrix entry and the expressions
                 matrixValue = M(labels(j), labels(j+1));
                 counter = counter + matrixValue * expressions{j} * expressions{j+1};
