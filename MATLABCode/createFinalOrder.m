@@ -1,4 +1,4 @@
-function FinalOrdering = mainFunction(M)
+function FinalOrdering = createFinalOrder(M)
     syms k [size(M,1) 1] real;  % symbolic variables k1, k2, ..., kn
     syms l [size(M,1) 1] real;  % symbolic variables l1, l2, ..., ln
 
