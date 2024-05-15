@@ -4,7 +4,7 @@ function FinalOrdering = createFinalOrder(M)
 
     % Process the solution vectors to get modifications
     [modifiedVectors, indicesAndCoeffs] = processSolutionVectors(M);
-    
+    %disp(modifiedVectors)
     % Get the graph ordering list
     LST = graphOrderingFS(M);
     
@@ -25,7 +25,7 @@ function FinalOrdering = createFinalOrder(M)
                 if modifiedVector(i) ~= 0
                     a = modifiedVector(i); % the coefficient a
                     % Append to FinalOrdering with the expression as specified
-                    expression = a * (k(originalIndex) - l(originalIndex));
+                    expression = a * (-k(originalIndex) + l(originalIndex));
                     FinalOrdering = [FinalOrdering; i, expression];
                 end
             end
@@ -37,7 +37,7 @@ function FinalOrdering = createFinalOrder(M)
     end
     
     % Display the FinalOrdering
-    disp('Final Ordering:');
-    disp(FinalOrdering)
+    %disp('Final Ordering:');
+    %disp(FinalOrdering)
     end
 

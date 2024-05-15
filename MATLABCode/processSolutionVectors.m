@@ -1,9 +1,14 @@
-function [modifiedVectors, indicesAndCoeffs] = processSolutionVectors(M)
+function [modifiedVectors, indicesAndCoeffs, isSuccess] = processSolutionVectors(M)
     % Compute the null space of the matrix M
     Y_raw = null(M, 'rational');
+    
     % Check if there are any solutions
     if isempty(Y_raw)
-        error('No independent solutions exist.');
+        disp('No independent solutions exist.');
+        modifiedVectors = [];
+        indicesAndCoeffs = [];
+        isSuccess = false;  % Return false indicating failure to process
+        return;  % Exit the function early
     end
 
     numSolutions = size(Y_raw, 2);
@@ -40,8 +45,10 @@ function [modifiedVectors, indicesAndCoeffs] = processSolutionVectors(M)
                 break;
             end
         end
-
     end
-disp('z term and gammas (coeffs and indices)');
-disp(indicesAndCoeffs);
+    
+    %disp('z term and gammas (coeffs and indices):');
+    %disp(indicesAndCoeffs);
+    
+    isSuccess = true;  % Return true indicating successful processing
 end

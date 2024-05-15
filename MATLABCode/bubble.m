@@ -4,7 +4,6 @@ function [sortedList, counter] = bubble(FinalOrdering, TARGET, M)
     sortedList = FinalOrdering;
     
     % Initialize the symbolic counter
-    syms counter;
     counter = sym(0);
     
     % Create a mapping from TARGET values to their indices for quick reference
@@ -15,7 +14,7 @@ function [sortedList, counter] = bubble(FinalOrdering, TARGET, M)
         end
     end
     
-    % Bubble sort algorithm with swap interactions
+    % Bubble sort algorithm with swap interactions and logging
     madeSwap = true;
     while madeSwap
         madeSwap = false;
@@ -28,14 +27,17 @@ function [sortedList, counter] = bubble(FinalOrdering, TARGET, M)
                 sortedList(i + 1, :) = temp;
                 
                 % Access matrix M to get the value for the multiplication
-                matrixValue = M(sortedList(i, 1), sortedList(i + 1, 1));
+                matrixValue = - M(sortedList(i, 1), sortedList(i+1, 1));
                 
                 % Update the counter with the product of secondary elements multiplied by matrixValue
-                counter = counter + matrixValue * sortedList(i, 2) * sortedList(i + 1, 2);
+                counterUpdate = matrixValue * sortedList(i, 2) * sortedList(i + 1, 2);
+                counter = counter + counterUpdate;
+                
+                % Log the swap and counter update
                 
                 madeSwap = true;
             end
         end
     end
-    disp(counter);
+disp(sortedList);
 end

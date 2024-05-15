@@ -3,20 +3,22 @@ tic;
 M1 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0;];
 M2 = [0 0 -1 -1; 0 0 -1 -1; 1 1 0 0; 1 1 0 0];
 M3 = [0 1 1; -1 0 -1; -1 1 0;];
+M4 = [0 1 0; -1 0 -1; 0 1 0];
+%M4 = [0 2; -2 0];
 
-M = M3;
+M = M2;
+
+%mainloop(M);
+
+%disp("loop done");
+
 
 [modifiedVectors, indicesAndCoeffs] = processSolutionVectors(M);
-Y = deriveflavourvector(M, true);
-disp('Independent solution vectors:');
-disp(Y);
+columnVector = indicesAndCoeffs(:,2);
+indices = columnVector.'; 
 
-disp('Modified Vectors:');
-disp(modifiedVectors);
-
-FinalOrdering = createFinalOrder(M);
-
-TARGET = graphOrderingFS(M);
-bubble(FinalOrdering, TARGET, M);
-
+%result = convertflavexpr(M, indices, modifiedVectors);
+result = superloop(M);
+% Display the results
+%disp(result);
 toc;
