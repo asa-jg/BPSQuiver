@@ -1,4 +1,11 @@
+tic;
+M1 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0;];
+M2 = [0 0 -1 -1; 0 0 -1 -1; 1 1 0 0; 1 1 0 0];
 M3 = [0 1 1; -1 0 -1; -1 1 0;];
+M4 = [0 2; -2 0];
+
 M = M3;
-inputList = graphOrdering(M);
-disp(countswaps(M, inputList));
+Range = 2;
+Rank = 1;
+
+ONEFS(M,Range,Rank);

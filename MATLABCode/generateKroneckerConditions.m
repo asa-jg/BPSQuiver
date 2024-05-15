@@ -23,7 +23,7 @@ function kroneckerDeltaStr = generateKroneckerConditions(sortedList)
         % Create a condition string for the collected terms
         if ~isempty(currentPos) && ~isempty(currentNeg)
             condition = sprintf('%s == %s', strjoin(currentPos, ' + '), strjoin(currentNeg, ' + '));
-            kroneckerDeltaStr = [kroneckerDeltaStr condition, ' and '];
+            kroneckerDeltaStr = [kroneckerDeltaStr condition, ' && '];
         end
         
         % Move to the next sequence
@@ -31,8 +31,8 @@ function kroneckerDeltaStr = generateKroneckerConditions(sortedList)
     end
     
     % Remove the trailing ' and ' if it exists
-    if endsWith(kroneckerDeltaStr, ' and ')
-        kroneckerDeltaStr = extractBefore(kroneckerDeltaStr, strlength(kroneckerDeltaStr) - 4);
+    if endsWith(kroneckerDeltaStr, ' && ')
+        kroneckerDeltaStr = extractBefore(kroneckerDeltaStr, strlength(kroneckerDeltaStr) - 3);
     end
 end
 
