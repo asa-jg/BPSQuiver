@@ -17,6 +17,7 @@ len = size(M,1);
 [modifiedVectors, indicesAndCoeffs] = processSolutionVectors(M);
 columnVector = indicesAndCoeffs(:,2);
 indices = columnVector.'; 
+%generateKroneckerConditions(sortedList)
 %disp(indices);
 
 %result = convertflavexpr(M, indices, modifiedVectors);

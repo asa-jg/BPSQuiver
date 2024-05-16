@@ -1,4 +1,4 @@
-function [qresult,zresult] = superloop(M)
+function [qresult,zresult, newkron] = superloop(M)
     list = graphOrdering(M);
     swaps = countswaps(M,list);
     [modifiedVectors, indicesAndCoeffs] = processSolutionVectors(M);
@@ -9,7 +9,8 @@ function [qresult,zresult] = superloop(M)
     %disp(swaps);
     %disp(mainloop(M));
     %disp(results);
+    [counter, newkron] = (mainloop(M));
 
-    qresult = (swaps) + (mainloop(M)) + (results);
+    qresult = (swaps) + counter + (results);
     zresult =  generateZexpr(indices);
     

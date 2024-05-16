@@ -1,4 +1,4 @@
-function counter = mainloop(M)
+function [counter,newkron] = mainloop(M)
     FinalOrdering = createFinalOrder(M);
     len = size(M,1);
     TARGET = graphOrderingFS(M);
