@@ -39,5 +39,5 @@ function [sortedList, counter] = bubble(FinalOrdering, TARGET, M)
             end
         end
     end
-disp(sortedList);
+%disp(sortedList);
 end

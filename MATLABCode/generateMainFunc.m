@@ -3,11 +3,11 @@ function generateMainFunc(M, Range)
     fileName = 'mainfunc.m';
     len = size(M,1);
     [qresult, zresult, newkron] = superloop(M);
-    disp(qresult);
-    disp(zresult);
+    %disp(qresult);
+    %disp(zresult);
     qresultnew = changeflavour(qresult,len);
     zresultnew = changeflavour(zresult,len);
-   
+    
     % Open the file for writing
     fid = fopen(fileName, 'w');
     
@@ -36,11 +36,11 @@ function generateMainFunc(M, Range)
     
     % Progress initialization
     fprintf(fid, '    fprintf(''\\nProgress: ['');\n');
-    fprintf(fid, '    progressSteps = 3;\n');
+    fprintf(fid, '    progressSteps = %d;\n',Range);
     fprintf(fid, '    checkPoints = linspace(1, totalCombinations, progressSteps+1);\n');
     
     % Writing the parallel for loop
-    fprintf(fid, '    parfor i = 1:totalCombinations\n');
+    fprintf(fid, '    for i = 1:totalCombinations\n');
     fprintf(fid, '        l = combinations(i, :);\n');
     fprintf(fid, '        %s\n',newkron);
     fprintf(fid, '            sum_exponent = 1/2*(sum(l)) + %s;\n', qresultnew);
@@ -54,7 +54,6 @@ function generateMainFunc(M, Range)
     fprintf(fid, '        end\n');
     fprintf(fid, '    end\n');
     fprintf(fid, '    fprintf(''] %% Complete\\n'');\n');
-
     % Close the function
     fprintf(fid, 'end\n');
 
