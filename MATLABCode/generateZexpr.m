@@ -1,4 +1,4 @@
-function expr = generateExpression(indices)
+function expr = generateZexpr(indices)
     % Validate input indices
     if isempty(indices)
         error('No indices provided.');

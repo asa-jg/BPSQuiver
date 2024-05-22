@@ -7,7 +7,7 @@ function result = mainfunc()
     z3 = sym('z3');
     z4 = sym('z4');
     z5 = sym('z5');
-    gridPoints = cell(1, 6);
+    gridPoints = cell(1, 8);
     [gridPoints{:}] = ndgrid(0:2);
     combinations = cellfun(@(x) x(:), gridPoints, 'UniformOutput', false);
     combinations = [combinations{:}];
@@ -15,11 +15,11 @@ function result = mainfunc()
     fprintf('\nProgress: [');
     progressSteps = 2;
     checkPoints = linspace(1, totalCombinations, progressSteps+1);
-    for i = 1:totalCombinations
+    parfor i = 1:totalCombinations
         l = combinations(i, :);
-        if l(3) + l(1) == l(6) + l(4) && l(2) == l(5)
-            sum_exponent = 1/2*(sum(l)) + l(5)*l(1) + l(5)*l(3);
-            z_term = z1^(l(1) - l(4));
+        if l(4) + l(3) + l(1) == l(8) + l(7) + l(5) && l(2) == l(6)
+            sum_exponent = 1/2*(sum(l)) + l(6)*l(1) + l(6)*l(3) + l(6)*l(4);
+            z_term = z1^(l(3) - l(7))*z2^(l(4) - l(8));
             denominator = prod(arrayfun(@(x) qpoch(q, x), l));
             expr = (q^sum_exponent) * z_term / denominator;
             result = result + (-1)^(sum(l)) * expr;

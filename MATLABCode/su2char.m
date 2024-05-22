@@ -1,5 +1,4 @@
-function expr = su2char(n)
-    syms z;
+function expr = su2char(n,z)
     m = n - 1;
     expr = sym(0); 
     

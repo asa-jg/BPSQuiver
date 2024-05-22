@@ -40,7 +40,7 @@ function generateMainFunc(M, Range)
     fprintf(fid, '    checkPoints = linspace(1, totalCombinations, progressSteps+1);\n');
     
     % Writing the parallel for loop
-    fprintf(fid, '    for i = 1:totalCombinations\n');
+    fprintf(fid, '    parfor i = 1:totalCombinations\n');
     fprintf(fid, '        l = combinations(i, :);\n');
     fprintf(fid, '        %s\n',newkron);
     fprintf(fid, '            sum_exponent = 1/2*(sum(l)) + %s;\n', qresultnew);
