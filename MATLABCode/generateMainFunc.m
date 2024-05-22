@@ -53,7 +53,7 @@ function generateMainFunc(M, Range)
     fprintf(fid, '            fprintf(''='');\n');
     fprintf(fid, '        end\n');
     fprintf(fid, '    end\n');
-    fprintf(fid, '    fprintf(''] %% Complete\\n'');\n');
+    fprintf(fid, '    fprintf(''] Calculating Taylor series...'');\n');
     % Close the function
     fprintf(fid, 'end\n');
 

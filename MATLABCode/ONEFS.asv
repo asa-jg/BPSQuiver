@@ -1,0 +1,12 @@
+function result = ONEFS(M,Range,Rank)
+    plotgraph(M);
+    syms q
+    generateMainFunc(M,Range)
+    res(q) = mainfunc();
+    tay = new_series(res,Range);
+    qinfnew = qinf^Rank;
+    fin = multiply(qinfnew, tay);
+    fin2 = multiply (q^2, fin);
+    result = rewrite(fin2, Range);
+    disp(['Schur index for M = ', mat2str(M)]);
+    disp(result);

@@ -28,5 +28,5 @@ function result = mainfunc()
             fprintf('=');
         end
     end
-    fprintf('] % Complete\n');
+    fprintf('] Calculating Taylor series...');
 end
