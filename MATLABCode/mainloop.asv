@@ -1,8 +1,0 @@
-function mainloop(M)
-    FinalOrdering = createFinalOrder(M);
-    TARGET = graphOrderingFS(M);
-    [sortedList, counter] = bubble(FinalOrdering, TARGET, M);
-
-    %fprintf('flavour vector: '); 
-    %deriveflavourvector(M, true);
-    end
