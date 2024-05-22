@@ -9,14 +9,10 @@ M7 = [0 1 0; -1 0 -1; 0 1 0;];
 M8 = [0 1 0 0 0; -1 0 -1 0 0; 0 1 0 1 0; 0 0 -1 0 -1; 0 0 0 1 0];
 M9 = [0 1 0 0; -1 0 -1 -1; 0 1 0 0; 0 1 0 0];
 
-M = M9;
+M = M1;
 Range = 2;
-Rank = 1;   
-syms q z1 z2 z3;
+Rank = 1;
+
 DeriveSchurIndex(M,Range,Rank);
-
-%disp(countTerms(expr)); 
-
-%disp(graphOrdering(M));
 
 toc;

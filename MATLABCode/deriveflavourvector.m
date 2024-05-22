@@ -22,7 +22,6 @@ function Y = deriveflavourvector(M, verbose)
 
     % If verbose is true, print the solution vectors in a human-readable format
     if verbose
-        %fprintf('Solutions:\n');
         for k = 1:numSolutions
             fprintf('yf%d = ', k);
             isFirst = true;

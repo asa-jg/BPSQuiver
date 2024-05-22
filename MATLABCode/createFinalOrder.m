@@ -15,7 +15,7 @@ function [FinalOrdering,modifiedVectors, indicesAndCoeffs] = createFinalOrder(M)
 
         % Get the graph ordering list
         LST = graphOrderingFS(M);
-        disp(LST);
+        %disp(LST);
         
         % Initialize the final ordering
         FinalOrdering = [];
@@ -58,6 +58,6 @@ function [FinalOrdering,modifiedVectors, indicesAndCoeffs] = createFinalOrder(M)
     end
     
     % Display the FinalOrdering
-    disp('Final Ordering:');
-    disp(FinalOrdering);
+    %disp('Final Ordering:');
+    %disp(FinalOrdering);
 end

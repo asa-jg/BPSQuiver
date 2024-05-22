@@ -4,8 +4,8 @@ function [qresult,zresult, newkron] = superloop(M)
     [~,modifiedVectors, indicesAndCoeffs] = createFinalOrder(M);
     columnVector = indicesAndCoeffs(:,2);
     indices = columnVector.'; 
-    disp(modifiedVectors);
-    disp(indicesAndCoeffs)
+    %disp(modifiedVectors);
+    %disp(indicesAndCoeffs)
     results = convertflavexpr(M, indices, modifiedVectors);
     %disp(swaps);
     %disp(mainloop(M));
@@ -14,5 +14,4 @@ function [qresult,zresult, newkron] = superloop(M)
 
     qresult = (swaps) + counter + (results);
     zresult =  generateZexpr(indices);
-    disp(zresult)
     

@@ -5,8 +5,9 @@ function [counter,newkron] = mainloop(M)
     [sortedList, counter] = bubble(FinalOrdering, TARGET, M);
     kroneckerCondition = generateKroneckerConditions(sortedList);
     newkron = changeflavour(kroneckerCondition,len);
-    disp(newkron);
+    %disp(newkron);
     %disp(counter);
-    fprintf('flavour vector: '); 
+    fprintf('Flavour vector(s): '); 
+    fprintf('\n');
     deriveflavourvector(M, true);
     end
