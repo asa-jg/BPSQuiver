@@ -1,10 +1,10 @@
 function resultreal = convertflavexpr(M, indices, modifiedVectors)
-    syms k [size(M, 1), 1] real; % Define k as a symbolic vector of size n
-    syms l [size(M, 1), 1] real; % Define l as a symbolic vector of size n
+    syms k [size(M, 1), 1] real; 
+    syms l [size(M, 1), 1] real; 
 
-    n = size(M, 1);              % Determine the size of the matrix M
-    fullList = 1:n;              % Create a list of numbers from 1 to n
-    result = cell(length(indices), 1);  % Initialize result as a cell array to hold results for each index
+    n = size(M, 1);             
+    fullList = 1:n;              
+    result = cell(length(indices), 1);  
 
     % Iterate through each index provided
     for idx = 1:length(indices)

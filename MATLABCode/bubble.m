@@ -1,5 +1,5 @@
 function [sortedList, counter] = bubble(FinalOrdering, TARGET, M)
-    % Initialize the sortedList with FinalOrdering
+    % Initialize the sortedList 
     n = size(FinalOrdering, 1);
     sortedList = FinalOrdering;
     
@@ -9,7 +9,7 @@ function [sortedList, counter] = bubble(FinalOrdering, TARGET, M)
     % Create a mapping from TARGET values to their indices for quick reference
     targetMap = zeros(1, max(TARGET));
     for i = 1:length(TARGET)
-        if TARGET(i) <= length(targetMap) % Ensure TARGET index is within the map range
+        if TARGET(i) <= length(targetMap)
             targetMap(TARGET(i)) = i;
         end
     end
