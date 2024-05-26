@@ -1,5 +1,5 @@
 function appendDataToFile(matrixData, symExpr1, symExpr2)
-    fid = fopen('SchurIndexList.txt', 'a');
+    fid = fopen('SchurIndexList4Nodes.txt', 'a');
     if fid == -1
         error('Failed to open the file.');
     end

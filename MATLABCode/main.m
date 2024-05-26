@@ -8,19 +8,9 @@ M6 = [0 0 1; 0 0 1; -1 -1 0];
 M7 = [0 1 0; -1 0 -1; 0 1 0;];
 M8 = [0 1 0 0 0; -1 0 -1 0 0; 0 1 0 1 0; 0 0 -1 0 -1; 0 0 0 1 0];
 M9 = [0 1 0 0; -1 0 -1 -1; 0 1 0 0; 0 1 0 0];
-
-
+M10 = [0 1 0 1; -1 0 0 1; 0 0 0 1; -1 -1 -1 0;];
 Range = 10;
-dimension = 3;
-matrices = generateAdjacencyMatrices(dimension);
-%numMatrices = size(matrices, 3);
-%for i = 1:numMatrices
-%    M = matrices(:, :, i);
-%    [result, unrefined] = DeriveSchurIndex(M,Range);
-%    appendDataToFile(M,result, unrefined);
-%end
 
-
-plotgraph(matrices(:,:,1));
+DeriveSchurIndex(M10,Range);
 
 toc;
