@@ -1,24 +1,25 @@
-function appendDataToFile(matrixData, intData, symExpr)
+function appendDataToFile(matrixData, symExpr1, symExpr2)
     fid = fopen('SchurIndexList.txt', 'a');
-    syms q
     if fid == -1
         error('Failed to open the file.');
     end
+    matrixData(matrixData < 0) = 0;
+    matrixData(matrixData == -0) = 0;
+
+
+
 
     fprintf(fid, 'BPS quiver ajacency matrix:\n');
     for i = 1:size(matrixData, 1)
         fprintf(fid, '%g\t', matrixData(i, :));
         fprintf(fid, '\n');
     end
-
-    fprintf(fid, 'Rank of the Coulomb branch:\n%d\n', intData);
-
-    fprintf(fid, 'Schur index:\n');
-    string = getPaddedCoefficients(symExpr);
-    string = mat2str(string);
-    fprintf(fid, '%s\n', string);
-    fprintf(fid, '%s\n', char(symExpr));
     fprintf(fid, '\n');
 
-    fclose(fid);
+    fprintf(fid, 'Refined Schur index:\n');
+    fprintf(fid, '%s\n', symExpr1);
+    fprintf(fid, '\n');
+    fprintf(fid, 'Unrefined Schur index:\n');
+    fprintf(fid, '%s\n', symExpr2);
+    fprintf(fid, '\n');
 end

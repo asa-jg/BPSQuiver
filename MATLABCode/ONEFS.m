@@ -1,4 +1,4 @@
-function result = ONEFS(M,Range,Rank)
+function [refined, unrefined] = ONEFS(M,Range,Rank)
     plotgraph(M);
     syms q 
     generateMainFunc(M,Range)
@@ -6,9 +6,11 @@ function result = ONEFS(M,Range,Rank)
     tay = taylor_series(res,Range);
     qinfnew = qinf^Rank;
     fin = multiply(qinfnew, tay);
-    result = rewrite(fin, Range);
+    refined = rewrite(fin, Range);
     fprintf('\n')
     disp(['Schur index for M = ', mat2str(M)]);
-    disp(result);
+    disp(refined);
     disp('Unrefined Schur index:');
-    disp(countTerms(result));
+    unrefined = countTerms(refined);
+    disp((unrefined));
+    

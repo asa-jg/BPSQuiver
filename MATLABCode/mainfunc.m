@@ -8,17 +8,17 @@ function result = mainfunc()
     z4 = sym('z4');
     z5 = sym('z5');
     gridPoints = cell(1, 6);
-    [gridPoints{:}] = ndgrid(0:7);
+    [gridPoints{:}] = ndgrid(0:10);
     combinations = cellfun(@(x) x(:), gridPoints, 'UniformOutput', false);
     combinations = [combinations{:}];
     totalCombinations = size(combinations, 1);
     fprintf('\nProgress: [');
-    progressSteps = 7;
+    progressSteps = 10;
     checkPoints = linspace(1, totalCombinations, progressSteps+1);
     parfor i = 1:totalCombinations
         l = combinations(i, :);
-        if l(1) + l(3) == l(4) + l(6) && l(4) + l(2) == l(1) + l(5)
-            sum_exponent = 1/2*(sum(l)) + l(5)*l(1) + l(6)*l(1) + l(5)*l(3) + (l(4) - l(1))*(l(6) - l(3)) + (l(4) - l(1))^2/2;
+        if l(1) + l(2) == l(4) + l(5) && l(4) + l(3) == l(1) + l(6)
+            sum_exponent = 1/2*(sum(l)) + l(5)*l(1) + l(6)*l(1) + l(6)*l(2) + (l(4) - l(1))*(l(5) - l(2)) + (l(4) - l(1))^2/2;
             z_term = z1^(l(1) - l(4));
             denominator = prod(arrayfun(@(x) qpoch(q, x), l));
             expr = (q^sum_exponent) * z_term / denominator;
