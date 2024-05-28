@@ -1,5 +1,5 @@
-Range = 4;
-dimension = 4;
+Range = 2;
+dimension = 3;
 matrices = generateAdjacencyMatrices(dimension);
 numMatrices = size(matrices, 3);
 disp(numMatrices);

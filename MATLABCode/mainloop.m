@@ -4,8 +4,9 @@ function [counter,newkron] = mainloop(M)
     TARGET = graphOrderingFS(M);
     [sortedList, counter] = bubble(FinalOrdering, TARGET, M);
     kroneckerCondition = generateKroneckerConditions(sortedList);
-    newkron = changeflavour(kroneckerCondition,len);
+    newkron = kroneckerCondition;
     %disp(newkron);
+    disp(changeflavourWL(kroneckerCondition,len));
     %disp(counter);
     fprintf('Flavour vector(s): '); 
     fprintf('\n');

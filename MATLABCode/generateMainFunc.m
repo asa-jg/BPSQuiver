@@ -2,7 +2,8 @@ function generateMainFunc(M, Range)
     % Define the path and name of the file
     fileName = 'mainfunc.m';
     len = size(M,1);
-    [qresult, zresult, newkron] = superloop(M);
+    [qresult, zresult, newkron1] = superloop(M);
+    newkron = changeflavour(newkron1,len);
     %disp(qresult);
     %disp(zresult);
     qresultnew = changeflavour(qresult,len);
@@ -42,7 +43,7 @@ function generateMainFunc(M, Range)
     % Writing the parallel for loop
     fprintf(fid, '    parfor i = 1:totalCombinations\n');
     fprintf(fid, '        l = combinations(i, :);\n');
-    fprintf(fid, '        %s\n',newkron);
+    fprintf(fid, '        %s && sum(l) < 2*%d +2\n',newkron,Range);
     fprintf(fid, '            sum_exponent = 1/2*(sum(l)) + %s;\n', qresultnew);
     fprintf(fid, '            z_term = %s;\n',zresultnew);
     fprintf(fid, '            denominator = prod(arrayfun(@(x) qpoch(q, x), l));\n');

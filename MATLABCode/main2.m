@@ -1,7 +1,5 @@
-M1 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0;];
-M = M1;
+syms z1 z2
+t1 = (su2char(3,z1));
+t2 = (su2char(3,z2));
 
-[modifiedVectors, indicesAndCoeffs, isSuccess] = processSolutionVectors2(M,3);
-disp(modifiedVectors);
-disp(indicesAndCoeffs);
-createFinalOrder2(M);
+disp(multiply(t1,t2));

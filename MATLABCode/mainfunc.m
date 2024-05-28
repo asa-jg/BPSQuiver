@@ -17,8 +17,8 @@ function result = mainfunc()
     checkPoints = linspace(1, totalCombinations, progressSteps+1);
     parfor i = 1:totalCombinations
         l = combinations(i, :);
-        if l(2) + l(1) + l(8) == l(6) + l(5) + l(4) && l(3) + l(4) == l(7) + l(8)
-            sum_exponent = 1/2*(sum(l)) + l(7)*l(1) + l(7)*l(2) + l(8)*l(1) + l(8)*l(2) + l(8)*l(3) + (l(7) - l(3))*(l(8) - l(4)) + (l(8) - l(4))^2/2;
+        if l(2) + l(1) == l(6) + l(5) && l(4) + l(3) == l(8) + l(7) && sum(l) < 2*4 +2
+            sum_exponent = 1/2*(sum(l)) + l(7)*l(1) + l(7)*l(2) + l(8)*l(1) + l(8)*l(2);
             z_term = z1^(l(2) - l(6))*z2^(l(4) - l(8));
             denominator = prod(arrayfun(@(x) qpoch(q, x), l));
             expr = (q^sum_exponent) * z_term / denominator;
