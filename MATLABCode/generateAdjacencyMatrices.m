@@ -1,6 +1,6 @@
 function matrices = generateAdjacencyMatrices(dimension)
     matrices = [];
-    values = [0, 1];
+    values = [0, 1, 2, -1, -2];
     num_values = length(values);
 
     % Number of elements in the upper triangle (excluding diagonal)

@@ -1,5 +1,5 @@
-function appendDataToFile(matrixData, symExpr1, symExpr2)
-    fid = fopen('SchurIndexList3NodesGeneral.txt', 'a');
+function appendDataToFile(matrixData, symExpr1)
+    fid = fopen('SchurIndexList4NodesNFS.txt', 'a');
     if fid == -1
         error('Failed to open the file.');
     end
@@ -19,7 +19,5 @@ function appendDataToFile(matrixData, symExpr1, symExpr2)
     fprintf(fid, 'Refined Schur index:\n');
     fprintf(fid, '%s\n', symExpr1);
     fprintf(fid, '\n');
-    fprintf(fid, 'Unrefined Schur index:\n');
-    fprintf(fid, '%s\n', symExpr2);
     fprintf(fid, '\n');
 end

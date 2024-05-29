@@ -2,23 +2,28 @@ tic;
 M1 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0;];
 M2 = [0 0 1 1; 0 0 1 1; -1 -1 0 0; -1 -1 0 0];
 M3 = [0 1 1; -1 0 -1; -1 1 0;];
-M4 = [0 2; -2 0];
+M4 = [0 1; -1 0];
 M5 = [0 1 0 0 0 0 0; -1 0 -1 0 0 0 0; 0 1 0 1 0 0 0; 0 0 -1 0 -1 0 0; 0 0 0 1 0 1 0; 0 0 0 0 -1 0 -1; 0 0 0 0 0 1 0];
-M6 = [0 0 1; 0 0 1; -1 -1 0];
+M6 = [0 1 0 -2; -1 0 2 0; 0 -2 0 1; 2 0 -1 0];
 M7 = [0 1 0; -1 0 -1; 0 1 0;];
 M8 = [0 1 0 0 0; -1 0 -1 0 0; 0 1 0 1 0; 0 0 -1 0 -1; 0 0 0 1 0];
 M9 = [0 1 0 0; -1 0 -1 -1; 0 1 0 0; 0 1 0 0];
 M10 = [0 1 0 1; -1 0 0 1; 0 0 0 1; -1 -1 -1 0;];
+M11 = [0 1 0 0 0 0 0 0 0 0 0; -1 0 -1 0 0 0 0 0 0 0 0; 0 1 0 1 0 0 0 0 0 0 0; 0 0 -1 0 -1 0 0 0 0 0 0; 0 0 0 1 0 1 0 0 0 0 0; 0 0 0 0 -1 0 -1 0 0 0 0; 0 0 0 0 0 1 0 1 0 0 0; 0 0 0 0 0 0 -1 0 -1 0 0; 0 0 0 0 0 0 0 1 0 1 0; 0 0 0 0 0 0 0 0 -1 0 -1; 0 0 0 0 0 0 0 0 0 1 0];
 
-Range = 4;
-M = M8;
+Range = 8;
+M = M2;
 
-%
-DeriveSchurIndexWL(M,Range);
+syms q
+%DeriveSchurIndexWL(M,Range);
+%plotgraph(M11);
 %plotgraph(M);
-
-%matrices = generateAdjacencyMatrices(5);
-
+%expr(q) = 
+%%disp(series(expr));
+%matrices = generateAdjacencyMatrices(4);
+%disp(matrices);
+DeriveSchurIndexWL(M,Range);
+%disp(generateLstrings(2));
 %disp(matrices);
 
 %DeriveSchurIndex(M,Range);

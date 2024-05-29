@@ -28,15 +28,18 @@ function generateFunction(adjMatrix, inputList, rangeVal)
 
     % Write the parfor loop for summation with progress updates
     fprintf(fid, '    parfor i = 1:totalCombinations\n');
-    fprintf(fid, '        l = combinations(i, :);\n');
-    fprintf(fid, '        sum_exponent = sum(l) + %s;\n', swapsnew);
-    fprintf(fid, '        denominator = prod(arrayfun(@(x) qpoch(q, x)^2, l));\n');
-    fprintf(fid, '        expr = q^sum_exponent / denominator;\n');
-    fprintf(fid, '        result = result + expr;\n');
+    fprintf(fid, '            l = combinations(i, :);\n');
+    fprintf(fid, '        if sum(l) < %d ;\n', 2*rangeVal + 2);
+    fprintf(fid, '            sum_exponent = sum(l) + %s;\n', swapsnew);
+    fprintf(fid, '            denominator = prod(arrayfun(@(x) qpoch(q, x)^2, l));\n');
+    fprintf(fid, '            expr = q^sum_exponent / denominator;\n');
+    fprintf(fid, '            result = result + expr;\n');
     % Insert progress update simulation
-    fprintf(fid, '        if any(i == checkPoints)\n');
-    fprintf(fid, '            fprintf(''='');\n');
+    fprintf(fid, '            if any(i == checkPoints)\n');
+    fprintf(fid, '                fprintf(''='');\n');
+    fprintf(fid, '            end\n');
     fprintf(fid, '        end\n');
+
     fprintf(fid, '    end\n');
     fprintf(fid, '    fprintf(''] %% Complete\\n'');\n'); % Close progress bar
 

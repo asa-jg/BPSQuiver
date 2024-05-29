@@ -3,7 +3,7 @@ function [result, unrefined] = DeriveSchurIndex(M,Range)
     Rank = ((size(M,2) - size(Y_raw,2))/2);
     if isempty(Y_raw)
         disp("No flavour symmetry")
-        result = NFS(M,10,Rank);
+        result = NFS(M,Range,Rank);
         unrefined = result;
         return
     end 

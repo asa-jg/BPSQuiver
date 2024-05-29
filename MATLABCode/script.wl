@@ -12,7 +12,7 @@ qPochhammer[q_, n_] :=
  qPochhammer[q, n] = If[n == 0, 1, Product[(1 - q^k), {k, 1, n}]]
 
 (*Range for summation indices*)
-range = Range[0, 4];
+range = Range[0, 6];
 
 (*Generate all valid combinations recursively*)
 ClearAll[generateCombinations];
@@ -23,15 +23,15 @@ generateCombinations[n_, max_, sumLimit_, prefix_ : {}] :=
       generateCombinations[n - 1, max, sumLimit, 
        Append[prefix, i]], {}], {i, 0, max}], 1]];
 
-combinations = generateCombinations[10, 4, 10];
+combinations = generateCombinations[8, 6, 14];
 
 (*Compute the sum using Table for efficiency and memoized calculations*)
 terms = Table[
    Module[{l, sumExponent, zTerm, denominator, expr}, l = comb;
     (*Check the conditions*)
-    If [ l[[5]] + l[[6]] == l[[10]] + l[[1]] && l[[3]] + l[[1]] == l[[8]] + l[[6]] && l[[4]] == l[[9]] && l[[2]] == l[[7]],
-    sumExponent = 1/2 (Total[l]) + l[[7]]*l[[1]] + l[[7]]*l[[3]] + l[[9]]*l[[3]] + l[[9]]*l[[5]];
-    zTerm = z1^(l[[1]] - l[[6]]);
+    If [ l[[2]] + l[[8]] + 2*l[[7]] == l[[6]] + l[[4]] + 2*l[[3]] && l[[1]] == l[[5]],
+    sumExponent = 1/2 (Total[l]) + l[[5]]*l[[2]] + 2*l[[7]]*l[[1]] + l[[8]]*l[[1]] + (l[[5]] - l[[1]])*(l[[8]] - l[[4]]) + (l[[5]] - l[[1]])*(2*l[[7]] - 2*l[[3]]);
+    zTerm = z1^(l[[3]] - l[[7]])*z2^(l[[4]] - l[[8]]);
      denominator = Times @@ (qPochhammer[q, #] & /@ l);
      expr = (q^sumExponent)*zTerm/denominator;
      (-1)^Total[l]*expr, 0]], {comb, combinations}];
@@ -39,17 +39,17 @@ terms = Table[
 (*Sum all terms together*)
 result = Total[terms];
 
-taylorSeries = Series[result, {q, 0, 4}];
+taylorSeries = Series[result, {q, 0, 6}];
 
 (*Convert the series to normal polynomial form, truncating higher-order terms*)
 truncatedResult = Normal[taylorSeries];
 
 qinf[q_] = 
   1 - 2*q - q^2 + 2*q^3 + q^4 + 2*q^5 - 2*q^6 - 2*q^8 - 2*q^9 + q^10;
-series2 = qinf[q]^2;
+series2 = qinf[q]^1;
 product = truncatedResult*series2;
 expandedProduct = Expand[product];
-truncatedResult2 = Normal[Series[expandedProduct, {q, 0, 4}]];
+truncatedResult2 = Normal[Series[expandedProduct, {q, 0, 6}]];
 Print[truncatedResult2];
 coeffs = CoefficientList[truncatedResult2, q];
 

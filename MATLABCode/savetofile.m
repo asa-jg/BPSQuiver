@@ -1,16 +1,18 @@
-Range = 2;
-dimension = 3;
-matrices = generateAdjacencyMatrices(dimension);
+Range = 8;
+%matrices = generateAdjacencyMatrices(dimension);
 numMatrices = size(matrices, 3);
 disp(numMatrices);
+num = 0;
 for i = 1:numMatrices
     M = matrices(:, :, i);
-    try
-        [result, unrefined] = DeriveSchurIndex(M, Range);
-        appendDataToFile(M, result, unrefined);
-    catch ME
-        disp(['Error processing matrix ', num2str(i), ': ', ME.message]);
-        % Optionally log the error or perform other actions
-        continue; % Skip to the next iteration
+    Y_raw = null(M, 'rational');
+    if isempty(Y_raw)
+        try
+            result = DeriveSchurIndexWL(M, Range);
+            appendDataToFile(M, result);
+        catch ME
+            disp(['Error processing matrix ', num2str(i), ': ', ME.message]);
+            continue; % Skip to the next iteration
+        end
     end
 end
