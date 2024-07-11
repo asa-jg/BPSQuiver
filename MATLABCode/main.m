@@ -1,31 +1,20 @@
 tic;
-M1 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0;];
-M2 = [0 0 1 1; 0 0 1 1; -1 -1 0 0; -1 -1 0 0];
-M3 = [0 1 1; -1 0 -1; -1 1 0;];
-M4 = [0 1; -1 0];
-M5 = [0 1 0 0 0 0 0; -1 0 -1 0 0 0 0; 0 1 0 1 0 0 0; 0 0 -1 0 -1 0 0; 0 0 0 1 0 1 0; 0 0 0 0 -1 0 -1; 0 0 0 0 0 1 0];
-M6 = [0 1 0 -2; -1 0 2 0; 0 -2 0 1; 2 0 -1 0];
-M7 = [0 1 0; -1 0 -1; 0 1 0;];
-M8 = [0 1 0 0 0; -1 0 -1 0 0; 0 1 0 1 0; 0 0 -1 0 -1; 0 0 0 1 0];
-M9 = [0 1 0 0; -1 0 -1 -1; 0 1 0 0; 0 1 0 0];
-M10 = [0 1 0 1; -1 0 0 1; 0 0 0 1; -1 -1 -1 0;];
-M11 = [0 1 0 0 0 0 0 0 0 0 0; -1 0 -1 0 0 0 0 0 0 0 0; 0 1 0 1 0 0 0 0 0 0 0; 0 0 -1 0 -1 0 0 0 0 0 0; 0 0 0 1 0 1 0 0 0 0 0; 0 0 0 0 -1 0 -1 0 0 0 0; 0 0 0 0 0 1 0 1 0 0 0; 0 0 0 0 0 0 -1 0 -1 0 0; 0 0 0 0 0 0 0 1 0 1 0; 0 0 0 0 0 0 0 0 -1 0 -1; 0 0 0 0 0 0 0 0 0 1 0];
+M1 = [0 0 1 0 0 0; 0 0 1 0 0 0; -1 -1 0 1 0 0; 0 0 -1 0 1 1; 0 0 0 -1 0 0; 0 0 0 -1 0 0];
+M2 = [0 0 -1 -1; 0 0 -1 -1; 1 1 0 0; 1 1 0 0];
+M3 = [0 0 -1 -1; 0 0 1 1; 1 -1 0 0; 1 -1 0 0];
+M4 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0];
 
-Range = 8;
-M = M2;
+Range = 4;
+M = M4;
+dimension = 5; 
 
-syms q
 %DeriveSchurIndexWL(M,Range);
-%plotgraph(M11);
-%plotgraph(M);
-%expr(q) = 
-%%disp(series(expr));
-%matrices = generateAdjacencyMatrices(4);
-%disp(matrices);
-DeriveSchurIndexWL(M,Range);
-%disp(generateLstrings(2));
-%disp(matrices);
 
-%DeriveSchurIndex(M,Range);
+%matrices5d = generateAdjacencyMatrices(dimension); 
+%disp(matrices5d(:,:,26430))
 
+numMatricesToProcess = 26430;
+range = 4;
+savetofile(matrices5d, Range, numMatricesToProcess);
+ 
 toc;

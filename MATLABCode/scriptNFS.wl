@@ -11,7 +11,7 @@ range = Range[0, 8];
 terms = Table[
    Module[{l,sumExponent, denominator, expr},
     l = {l1, l2, l3, l4};
-     sumExponent = (Total[l]) + 2*l[[1]]*l[[2]] + 2*l[[3]]*l[[1]] + 2*l[[3]]*l[[2]] + 2*l[[4]]*l[[2]] + 2*l[[4]]*l[[3]];
+     sumExponent = (Total[l]) + 2*l[[2]]*l[[1]] + 2*l[[3]]*l[[1]] + 2*l[[3]]*l[[2]] + 2*l[[4]]*l[[1]] + 2*l[[4]]*l[[2]] + 2*l[[4]]*l[[3]];
      denominator = Times @@ ((qPochhammer[q, #])^2 & /@ l);
      expr = (q^sumExponent)/denominator;
      expr

@@ -1,0 +1,18 @@
+tic;
+M1 = [0 0 1 0 0 0; 0 0 1 0 0 0; -1 -1 0 1 0 0; 0 0 -1 0 1 1; 0 0 0 -1 0 0; 0 0 0 -1 0 0];
+M2 = [0 0 -1 -1; 0 0 -1 -1; 1 1 0 0; 1 1 0 0];
+M3 = [0 0 -1 -1; 0 0 1 1; 1 -1 0 0; 1 -1 0 0];
+
+Range = 4;
+M = M2;
+
+%result = DeriveSchurIndexWL(M,Range);
+%matrices5d = generateAdjacencyMatrices(5);
+
+% Example usage
+dimension = 5; % Example dimension
+numMatricesToProcess = 10; % Example number of matrices to process
+range = 2; % Example range
+%matrices5d = generateAdjacencyMatrices(dimension); % Assuming this function generates the 5D matrices
+savetofile(matrices5d, range, numMatricesToProcess);
+toc;

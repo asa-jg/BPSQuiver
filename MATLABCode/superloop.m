@@ -1,5 +1,7 @@
 function [qresult,zresult, newkron] = superloop(M)
     list = graphOrdering(M);
+    %list = [-3 -2 -1 3 2 1];
+    disp(list) 
     swaps = countswaps(M,list);
     [~,modifiedVectors, indicesAndCoeffs] = createFinalOrder(M);
     columnVector = indicesAndCoeffs(:,2);

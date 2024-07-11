@@ -13,7 +13,7 @@ function result = hardcoded_generalfunc(Range)
     parfor i = 1:totalCombinations
             l = combinations(i, :);
         if sum(l) < 18 ;
-            sum_exponent = sum(l) + 2*l(1)*l(2) + 2*l(3)*l(1) + 2*l(3)*l(2) + 2*l(4)*l(2) + 2*l(4)*l(3);
+            sum_exponent = sum(l) + 2*l(2)*l(1) + 2*l(3)*l(1) + 2*l(3)*l(2) + 2*l(4)*l(1) + 2*l(4)*l(2) + 2*l(4)*l(3);
             denominator = prod(arrayfun(@(x) qpoch(q, x)^2, l));
             expr = q^sum_exponent / denominator;
             result = result + expr;
