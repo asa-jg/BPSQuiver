@@ -31,9 +31,9 @@ After cloning the repository, you need to set it up in MATLAB:
   ```
 ## Usage
 
-Total support is currently available for all quivers.
+Total support is currently available for all acyclic quivers.
 
-In main.m, run `DeriveSchurIndex(M,Range,Rank);` where `M` is the adjacency matrix, `Range` is the desired maximum exponent of `q` in the Schur Index, and `Rank` is the rank of the Coulomb Branch.
+In main.m, run `DeriveSchurIndexWL(M,Range,Rank);` where `M` is the adjacency matrix, `Range` is the desired maximum exponent of `q` in the Schur Index, and `Rank` is the rank of the Coulomb Branch.
 
 ## Mathematica Code
 Coming soon.
