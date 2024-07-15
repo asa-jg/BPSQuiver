@@ -4,6 +4,7 @@ function result = DeriveSchurIndexWL(M,Range)
     Rank = ((size(M,2) - size(Y_raw,2))/2);
     if isempty(Y_raw)
         disp("No flavour symmetry")
+        Range = 5;
         result = NFS(M,Range);
         return
     end 

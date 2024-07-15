@@ -1,20 +1,16 @@
-tic;
-M1 = [0 0 1 0 0 0; 0 0 1 0 0 0; -1 -1 0 1 0 0; 0 0 -1 0 1 1; 0 0 0 -1 0 0; 0 0 0 -1 0 0];
-M2 = [0 0 -1 -1; 0 0 -1 -1; 1 1 0 0; 1 1 0 0];
-M3 = [0 0 -1 -1; 0 0 1 1; 1 -1 0 0; 1 -1 0 0];
-M4 = [0 -1 -1 -1 -1; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0; 1 0 0 0 0];
+tic; 
 
 Range = 4;
-M = M4;
-dimension = 5; 
+M = M5;
+dimension = 6; 
+random = true;
+maxMatrices = 5647; 
 
-%DeriveSchurIndexWL(M,Range);
+%matrices6 = generateAdjacencyMatrices(dimension, random, maxMatrices); 
+load('matrices_progress.mat', 'matrices'); 
 
-%matrices5d = generateAdjacencyMatrices(dimension); 
-%disp(matrices5d(:,:,26430))
+fileName = "SchurIndexList6Nodes.txt";
+numMatricesToProcess = size(matrices,3);
+savetofile(matrices, Range, numMatricesToProcess, fileName);
 
-numMatricesToProcess = 26430;
-range = 4;
-savetofile(matrices5d, Range, numMatricesToProcess);
- 
 toc;

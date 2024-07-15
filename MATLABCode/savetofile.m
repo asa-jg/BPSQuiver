@@ -1,4 +1,4 @@
-function savetofile(matrices, range, numMatricesToProcess)
+function savetofile(matrices, range, numMatricesToProcess, fileName)
     Range = range;
     numMatrices = size(matrices, 3);
 
@@ -28,7 +28,8 @@ function savetofile(matrices, range, numMatricesToProcess)
             % Try to process the matrix and append data to the file
             try
                 result = DeriveSchurIndexWL(M, Range);
-                appendDataToFile(M, result);
+                appendDataToFile(M, result, fileName);
+                disp(processedCount);
             catch ME
                 disp(['Error processing matrix ', num2str(randomIndex), ': ', ME.message]);
                 continue; % Skip to the next iteration

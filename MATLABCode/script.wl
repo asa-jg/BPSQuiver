@@ -23,15 +23,15 @@ generateCombinations[n_, max_, sumLimit_, prefix_ : {}] :=
       generateCombinations[n - 1, max, sumLimit, 
        Append[prefix, i]], {}], {i, 0, max}], 1]];
 
-combinations = generateCombinations[10, 4, 10];
+combinations = generateCombinations[12, 4, 10];
 
 (*Compute the sum using Table for efficiency and memoized calculations*)
 terms = Table[
    Module[{l, sumExponent, zTerm, denominator, expr}, l = comb;
     (*Check the conditions*)
-    If [ l[[4]] == l[[9]] && l[[5]] + 2*l[[1]] == l[[10]] + 2*l[[6]] && l[[2]] + l[[6]] == l[[7]] + l[[1]] && l[[3]] == l[[8]],
-    sumExponent = 1/2 (Total[l]) + l[[6]]*l[[3]] + l[[6]]*l[[4]] + l[[8]]*l[[2]] + l[[7]]*l[[4]] + l[[8]]*l[[4]] + l[[10]]*l[[4]] + (l[[6]] - l[[1]])*(l[[8]] - l[[3]]);
-    zTerm = z1^(l[[1]] - l[[6]]);
+    If [ l[[5]] + l[[4]] + 2*l[[6]] == l[[11]] + l[[10]] + 2*l[[12]] && l[[1]] == l[[7]] && l[[11]] + l[[12]] + l[[2]] == l[[5]] + l[[6]] + l[[8]] && l[[5]] + 2*l[[6]] + l[[3]] == l[[11]] + 2*l[[12]] + l[[9]],
+    sumExponent = 1/2 (Total[l]) + l[[8]]*l[[1]] + l[[9]]*l[[1]] + l[[7]]*l[[4]] + l[[9]]*l[[2]] + l[[7]]*l[[5]] + l[[8]]*l[[4]] + l[[7]]*l[[6]] + l[[9]]*l[[4]] + l[[9]]*l[[6]] + l[[12]]*l[[4]] - (2*l[[12]] - 2*l[[6]])^2 + (l[[7]] - l[[1]])*(l[[12]] - l[[6]]) - (l[[8]] - l[[2]])*(l[[11]] - l[[5]]) + (l[[11]] - l[[5]])*(l[[12]] - l[[6]]) - (l[[7]] - l[[1]])*(2*l[[12]] - 2*l[[6]]) - (l[[8]] - l[[2]])*(2*l[[12]] - 2*l[[6]]) + (l[[12]] - l[[6]])*(2*l[[12]] - 2*l[[6]]) + (l[[11]] - l[[5]])^2/2 + 2*(l[[12]] - l[[6]])^2;
+    zTerm = z1^(l[[5]] - l[[11]])*z2^(l[[6]] - l[[12]]);
      denominator = Times @@ (qPochhammer[q, #] & /@ l);
      expr = (q^sumExponent)*zTerm/denominator;
      (-1)^Total[l]*expr, 0]], {comb, combinations}];

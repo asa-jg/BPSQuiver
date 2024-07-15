@@ -1,60 +1,84 @@
-function matrices = generateAdjacencyMatrices(dimension)
+function matrices = generateAdjacencyMatrices(dimension, random, maxMatrices)
     matrices = [];
     values = [0, 1, -1];
-    maxMatrices = 1000000; % Maximum number of matrices to generate
 
     num_elements = nchoosek(dimension, 2);
+    num_combinations = numel(values)^num_elements;
 
-    % Initialize the count of valid matrices
+    progressFile = 'matrices_progress.mat'; 
+
     matrixCount = 0;
 
-    % Generate combinations on-the-fly using nested loops
-    combs = cell(1, num_elements);
-    for i = 1:numel(values)^num_elements
-        [combs{:}] = ind2sub(repmat(numel(values), 1, num_elements), i);
-        currentComb = values(cell2mat(combs));
+    indices = 1:num_combinations;
 
-        % Create the matrix with antisymmetric property
-        M = zeros(dimension);
-        comb_idx = 1;
-        for row = 1:dimension
-            for col = (row + 1):dimension
-                M(row, col) = currentComb(comb_idx);
-                M(col, row) = -M(row, col);
-                comb_idx = comb_idx + 1;
+    if random
+        indices = randperm(num_combinations);
+    end
+
+    generatedIndices = false(1, num_combinations);
+
+    try
+        for idx = indices
+            if random && generatedIndices(idx)
+                continue;
             end
-        end
-        
-        % Check if the matrix has no isolated nodes and is connected
-        if ~hasIsolatedNode(M) && isConnected(M) && ~checkCycle(M)
-            % Check if this matrix is isomorphic to any already found matrices
-            isIsomorphic = false;
-            %for k = 1:size(matrices, 3)
-            %    if areIsomorphic(M, matrices(:, :, k))
-            %        isIsomorphic = true;
-            %        break;
-            %    end
-            %end
-            if ~isIsomorphic
-                matrices = cat(3, matrices, M);
-                matrixCount = matrixCount + 1;
-                if matrixCount >= maxMatrices
-                    break;
+
+            if random
+                generatedIndices(idx) = true;
+            end
+
+            combs = cell(1, num_elements);
+            [combs{:}] = ind2sub(repmat(numel(values), 1, num_elements), idx);
+            currentComb = values(cell2mat(combs));
+
+            M = zeros(dimension);
+            comb_idx = 1;
+            for row = 1:dimension
+                for col = (row + 1):dimension
+                    M(row, col) = currentComb(comb_idx);
+                    M(col, row) = -M(row, col);
+                    comb_idx = comb_idx + 1;
+                end
+            end
+
+            if ~hasIsolatedNode(M) && isConnected(M) && ~checkCycle(M)
+                isIsomorphic = false;
+                for k = 1:size(matrices, 3)
+                    if areIsomorphic(M, matrices(:, :, k))
+                        isIsomorphic = true;
+                        break;
+                    end
+                end
+                if ~isIsomorphic
+                    matrices = cat(3, matrices, M);
+                    matrixCount = matrixCount + 1;
+                    disp(matrixCount);
+                    if mod(matrixCount, 10) == 0
+                        saveProgress(matrices);
+                    end
+                    if matrixCount >= maxMatrices
+                        break;
+                    end
                 end
             end
         end
+    catch ME
+        disp(['Error occurred: ', ME.message]);
+        saveProgress(matrices);
     end
 end
 
+function saveProgress(matrices)
+    save('matrices_progress.mat', 'matrices');
+end
+
 function result = hasIsolatedNode(M)
-    % Check if there is any isolated node (entire row being zero)
     result = any(all(M == 0, 2));
 end
 
 function result = isConnected(M)
-    % Check if the graph represented by adjacency matrix M is connected
-    G = graph(abs(M)); % Use absolute values to ignore directions
-    result = all(conncomp(G) == 1); % All nodes must belong to the same component
+    G = graph(abs(M)); 
+    result = all(conncomp(G) == 1); 
 end
 
 function hasCycle = checkCycle(adjacencyMatrix)
@@ -62,7 +86,7 @@ function hasCycle = checkCycle(adjacencyMatrix)
     visited = false(1, n);
     recStack = false(1, n);
     hasCycle = false;
-    
+
     for node = 1:n
         if ~visited(node)
             if dfsCycleCheck(node, visited, recStack, adjacencyMatrix)
@@ -77,8 +101,7 @@ function cycleDetected = dfsCycleCheck(node, visited, recStack, adjacencyMatrix)
     visited(node) = true;
     recStack(node) = true;
     cycleDetected = false;
-    
-    % Find neighbors where there is an outgoing arrow from the current node
+
     neighbors = find(adjacencyMatrix(node, :) > 0);
     for i = 1:length(neighbors)
         neighbor = neighbors(i);
@@ -90,6 +113,6 @@ function cycleDetected = dfsCycleCheck(node, visited, recStack, adjacencyMatrix)
             return;
         end
     end
-    
+
     recStack(node) = false;
 end
