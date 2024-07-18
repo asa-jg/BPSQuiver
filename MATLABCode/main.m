@@ -1,16 +1,18 @@
 tic; 
 
 Range = 4;
-M = M5;
-dimension = 6; 
+dimension = 7; 
 random = true;
-maxMatrices = 5647; 
+maxMatrices = 5000;
 
-%matrices6 = generateAdjacencyMatrices(dimension, random, maxMatrices); 
-load('matrices_progress.mat', 'matrices'); 
+%matrices = generateAdjacencyMatrices(dimension,random,maxMatrices);
 
-fileName = "SchurIndexList6Nodes.txt";
+%load('matrices_progress.mat', 'matrices'); 
+%disp(matrices);
+
+fileName = "SchurIndexList7Nodes.txt";
 numMatricesToProcess = size(matrices,3);
 savetofile(matrices, Range, numMatricesToProcess, fileName);
+%DeriveSchurIndexWL(matrices(:,:,1),Range);
 
 toc;

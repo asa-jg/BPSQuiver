@@ -15,7 +15,7 @@ function isomorphic = areIsomorphic(A, B)
         % Permute the rows and columns of A
         permutedA = A(p, p);
         
-        % Check if the permuted A is equal to B
+        % Check if the permuted A is equal tox1 B
         if isequal(permutedA, B)
             isomorphic = true;
             return;

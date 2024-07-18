@@ -1,30 +1,28 @@
 function matrices = generateAdjacencyMatrices(dimension, random, maxMatrices)
     matrices = [];
     values = [0, 1, -1];
-
+    
     num_elements = nchoosek(dimension, 2);
     num_combinations = numel(values)^num_elements;
 
-    progressFile = 'matrices_progress.mat'; 
+    %progressFile = 'matrices_progress.mat'; 
 
     matrixCount = 0;
 
-    indices = 1:num_combinations;
-
     if random
-        indices = randperm(num_combinations);
+        generatedIndices = containers.Map('KeyType', 'double', 'ValueType', 'logical');
     end
 
-    generatedIndices = false(1, num_combinations);
-
     try
-        for idx = indices
-            if random && generatedIndices(idx)
-                continue;
-            end
-
+        while matrixCount < maxMatrices
             if random
+                idx = randi(num_combinations);
+                while isKey(generatedIndices, idx)
+                    idx = randi(num_combinations);
+                end
                 generatedIndices(idx) = true;
+            else
+                idx = matrixCount + 1;
             end
 
             combs = cell(1, num_elements);
@@ -54,7 +52,7 @@ function matrices = generateAdjacencyMatrices(dimension, random, maxMatrices)
                     matrixCount = matrixCount + 1;
                     disp(matrixCount);
                     if mod(matrixCount, 10) == 0
-                        saveProgress(matrices);
+                        saveProgress(matrices, matrixCount);
                     end
                     if matrixCount >= maxMatrices
                         break;
@@ -64,12 +62,12 @@ function matrices = generateAdjacencyMatrices(dimension, random, maxMatrices)
         end
     catch ME
         disp(['Error occurred: ', ME.message]);
-        saveProgress(matrices);
+        saveProgress(matrices, matrixCount);
     end
 end
 
-function saveProgress(matrices)
-    save('matrices_progress.mat', 'matrices');
+function saveProgress(matrices, matrixCount)
+    save('matrices_progress.mat', 'matrices', 'matrixCount');
 end
 
 function result = hasIsolatedNode(M)

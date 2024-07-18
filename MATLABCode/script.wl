@@ -23,15 +23,15 @@ generateCombinations[n_, max_, sumLimit_, prefix_ : {}] :=
       generateCombinations[n - 1, max, sumLimit, 
        Append[prefix, i]], {}], {i, 0, max}], 1]];
 
-combinations = generateCombinations[12, 4, 10];
+combinations = generateCombinations[14, 4, 10];
 
 (*Compute the sum using Table for efficiency and memoized calculations*)
 terms = Table[
    Module[{l, sumExponent, zTerm, denominator, expr}, l = comb;
     (*Check the conditions*)
-    If [ l[[5]] + l[[4]] + 2*l[[6]] == l[[11]] + l[[10]] + 2*l[[12]] && l[[1]] == l[[7]] && l[[11]] + l[[12]] + l[[2]] == l[[5]] + l[[6]] + l[[8]] && l[[5]] + 2*l[[6]] + l[[3]] == l[[11]] + 2*l[[12]] + l[[9]],
-    sumExponent = 1/2 (Total[l]) + l[[8]]*l[[1]] + l[[9]]*l[[1]] + l[[7]]*l[[4]] + l[[9]]*l[[2]] + l[[7]]*l[[5]] + l[[8]]*l[[4]] + l[[7]]*l[[6]] + l[[9]]*l[[4]] + l[[9]]*l[[6]] + l[[12]]*l[[4]] - (2*l[[12]] - 2*l[[6]])^2 + (l[[7]] - l[[1]])*(l[[12]] - l[[6]]) - (l[[8]] - l[[2]])*(l[[11]] - l[[5]]) + (l[[11]] - l[[5]])*(l[[12]] - l[[6]]) - (l[[7]] - l[[1]])*(2*l[[12]] - 2*l[[6]]) - (l[[8]] - l[[2]])*(2*l[[12]] - 2*l[[6]]) + (l[[12]] - l[[6]])*(2*l[[12]] - 2*l[[6]]) + (l[[11]] - l[[5]])^2/2 + 2*(l[[12]] - l[[6]])^2;
-    zTerm = z1^(l[[5]] - l[[11]])*z2^(l[[6]] - l[[12]]);
+    If [ l[[5]] + (4*l[[1]])/3 == l[[12]] + (4*l[[8]])/3 && l[[2]] == l[[9]] && l[[8]]/3 + l[[3]] == l[[1]]/3 + l[[10]] && l[[8]] + l[[6]] == l[[1]] + l[[13]] && (2*l[[1]])/3 + l[[4]] == (2*l[[8]])/3 + l[[11]] && l[[1]]/3 + l[[7]] == l[[8]]/3 + l[[14]],
+    sumExponent = 1/2 (Total[l]) + l[[9]]*l[[1]] + l[[10]]*l[[1]] + l[[10]]*l[[2]] + l[[11]]*l[[2]] + l[[9]]*l[[5]] + l[[14]]*l[[1]] + l[[11]]*l[[5]] + l[[13]]*l[[3]] + l[[11]]*l[[6]] + l[[13]]*l[[5]] + l[[14]]*l[[4]] + l[[14]]*l[[5]] + l[[14]]*l[[6]] - ((2*l[[8]])/3 - (2*l[[1]])/3)*((4*l[[8]])/3 - (4*l[[1]])/3) + (l[[8]] - l[[1]])*(l[[10]] - l[[3]]) + (l[[8]] - l[[1]])*((2*l[[8]])/3 - (2*l[[1]])/3) + (l[[9]] - l[[2]])*(l[[8]]/3 - l[[1]]/3) - (l[[9]] - l[[2]])*((2*l[[8]])/3 - (2*l[[1]])/3) - (l[[11]] - l[[4]])*(l[[8]]/3 - l[[1]]/3) - (l[[13]] - l[[6]])*(l[[8]]/3 - l[[1]]/3) - (l[[13]] - l[[6]])*((2*l[[8]])/3 - (2*l[[1]])/3) + (4*(l[[8]] - l[[1]])^2)/9;
+    zTerm = z1^(l[[1]] - l[[8]]);
      denominator = Times @@ (qPochhammer[q, #] & /@ l);
      expr = (q^sumExponent)*zTerm/denominator;
      (-1)^Total[l]*expr, 0]], {comb, combinations}];
@@ -46,7 +46,7 @@ truncatedResult = Normal[taylorSeries];
 
 qinf[q_] = 
   1 - 2*q - q^2 + 2*q^3 + q^4 + 2*q^5 - 2*q^6 - 2*q^8 - 2*q^9 + q^10;
-series2 = qinf[q]^2;
+series2 = qinf[q]^3;
 product = truncatedResult*series2;
 expandedProduct = Expand[product];
 truncatedResult2 = Normal[Series[expandedProduct, {q, 0, 4}]];
